@@ -1,0 +1,14 @@
+/target
+
+# Local environment
+.env
+.env.*
+
+# IDE/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs / temp
+*.log
+tmp/

@@ -1,4 +1,6 @@
 use axum::{middleware, Router};
+use tower_http::trace::{TraceLayer, DefaultOnRequest, DefaultOnResponse};
+use tracing::Level;
 
 use crate::{config::AppConfig, middleware::require_api_key::require_api_key};
 use crate::routes::sign::signers_routes;
@@ -22,4 +24,9 @@ pub fn router(config: AppConfig) -> Router {
     Router::new()
         .merge(public)
         .merge(protected)
+        .layer(
+            TraceLayer::new_for_http()
+                .on_request(DefaultOnRequest::new().level(Level::INFO))
+                .on_response(DefaultOnResponse::new().level(Level::INFO))
+        )
 }

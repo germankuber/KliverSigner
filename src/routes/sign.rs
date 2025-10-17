@@ -17,6 +17,7 @@ pub fn sign_routes() -> Router<AppConfig> {
 }
 
 #[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct StarknetSignRequest {
     // 0x-prefixed or plain hex felt hash
     pub hash: String,
@@ -61,6 +62,7 @@ fn to_hex_prefixed(f: &Felt) -> String {
 }
 
 #[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct PublicKeyRequest {
     pub hash: String,
     pub r: String,
